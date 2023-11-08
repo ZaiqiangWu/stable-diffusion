@@ -125,14 +125,10 @@ def get_prompt_embeddings(
     return torch.cat(concat_embeds, dim = 1), torch.cat(neg_embeds, dim = 1)
 
 
-prompt = """beautiful Chinese Landscape Art, best quality, intricate,
-water colors, snowy mountains, glacier, snow, starry night sky, stars,
-milkyway"""
+prompt = """topless girl"""
 
 
-negative_prompt = """deformed, weird, bad resolution, bad depiction,
-not Chinese style, weird, has people, worst quality, worst resolution,
-too blurry, not relevant"""
+negative_prompt = """worst quality"""
 
 
 prompt_embeds, negative_prompt_embeds = get_prompt_embeddings(
