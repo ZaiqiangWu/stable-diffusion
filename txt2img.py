@@ -4,7 +4,7 @@ from diffusers import DiffusionPipeline
 
 
 #pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
-pipe = DiffusionPipeline.from_pretrained("./ckpts/senhentai_v12.safetensors")
+pipe = DiffusionPipeline.from_pretrained("./ckpts/senhentai_v12.safetensors",use_safetensors=True)
 
 
 def null_safety(images, **kwargs):
