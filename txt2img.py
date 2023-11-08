@@ -7,7 +7,7 @@ pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
 
 
 def null_safety(images, **kwargs):
-    return images, False
+    return images, [False]
 
 
 pipe.safety_checker = null_safety
