@@ -2,9 +2,15 @@ import torch
 
 from diffusers import DiffusionPipeline
 
+
 pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
-if pipe.safety_checker is not None:
-    pipe.safety_checker = lambda images, **kwargs: (images, False)
+
+
+def null_safety(images, **kwargs):
+    return images, False
+
+
+pipe.safety_checker = null_safety
 
 pipe = pipe.to("cuda")
 
