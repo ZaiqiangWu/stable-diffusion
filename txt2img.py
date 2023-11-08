@@ -1,7 +1,7 @@
 from diffusers import StableDiffusionPipeline
 import torch
 
-model_id = "runwayml/stable-diffusion-v1-5"
+model_id = "./senhentai_v12.safetensors"
 pipe = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
 pipe = pipe.to("cuda")
 
