@@ -1,18 +1,18 @@
-# モデルのアーキテクチャを定義する
-import torch
-from stable_diffusion import StableDiffusionPipeline, DPMSolverMultistepScheduler
-model_id = "stabilityai/stable-diffusion-2-1"
-model = StableDiffusionPipeline.from_pretrained(model_id, torch_dtype=torch.float16)
-model.scheduler = DPMSolverMultistepScheduler.from_config(pipe.scheduler.config)
+from diffusers import DiffusionPipeline
+import torch 
 
-# .ckptファイルからモデルのパラメータを読み込む
-ckpt_path = './sd-v1-5-inpainting.ckpt'
-checkpoint = torch.load(ckpt_path, map_location="gpu")
-model.load_state_dict(checkpoint['state_dict'])
+base_model_id = "stabilityai/stable-diffusion-xl-base-0.9"
+pipeline = DiffusionPipeline.from_pretrained(base_model_id, torch_dtype=torch.float16).to("cuda")
+pipeline.load_lora_weights(".", weight_name="Kamepan.safetensors")
 
-# モデルを推論モードにする
-model.eval()
+prompt = "anime screencap, glint, drawing, best quality, light smile, shy, a full body of a girl wearing wedding dress in the middle of the forest beneath the trees, fireflies, big eyes, 2d, cute, anime girl, waifu, cel shading, magical girl, vivid colors, (outline:1.1), manga anime artstyle, masterpiece, offical wallpaper, glint <lora:kame_sdxl_v2:1>"
+negative_prompt = "(deformed, bad quality, sketch, depth of field, blurry:1.1), grainy, bad anatomy, bad perspective, old, ugly, realistic, cartoon, disney, bad propotions"
+generator = torch.manual_seed(2947883060)
+num_inference_steps = 30
+guidance_scale = 7
 
-# モデルにプロンプトを与えて、画像を生成する
-prompt = 'xxxxxx'
-image = model(prompt)
+image = pipeline(
+    prompt=prompt, negative_prompt=negative_prompt, num_inference_steps=num_inference_steps,
+    generator=generator, guidance_scale=guidance_scale
+).images[0]
+image.save("Kamepan.png")
