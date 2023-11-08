@@ -12,6 +12,7 @@ import sys
 import os
 import shutil
 import time
+import cv2
 
 import torch
 import matplotlib.pyplot as plt
@@ -193,17 +194,11 @@ for count, seed in enumerate(seeds):
     images = images + new_img
 
 # Plot pipeline outputs.
-def plot_images(images, labels = None):
+def save_images(images, labels = None):
     N = len(images)
     n_cols = 5
     n_rows = int(np.ceil(N / n_cols))
 
-    plt.figure(figsize = (20, 5 * n_rows))
     for i in range(len(images)):
-        plt.subplot(n_rows, n_cols, i + 1)
-        if labels is not None:
-            plt.title(labels[i])
-        plt.imshow(np.array(images[i]))
-        plt.axis(False)
-    plt.show()
-plot_images(images, seeds[:len(images)])
+        cv2.imwrite(str(i).zfill(2)+'.jpg',images[i])
+save_images(images, seeds[:len(images)])
