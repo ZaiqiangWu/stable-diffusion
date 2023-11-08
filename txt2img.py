@@ -1,7 +1,6 @@
 import torch
 
 from diffusers import DiffusionPipeline, StableDiffusionPipeline
-from diffusers.pipelines.
 
 
 #pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
