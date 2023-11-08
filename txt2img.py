@@ -1,8 +1,9 @@
-from diffusers import DiffusionPipeline
 import torch
 
-model_id = "./ckpts"
-pipe = DiffusionPipeline.from_pretrained(model_id, use_safetensors=True)
+from diffusers import DiffusionPipeline
+
+pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
+
 pipe = pipe.to("cuda")
 
 prompt = "a photo of an astronaut riding a horse on mars"
