@@ -200,5 +200,5 @@ def save_images(images, labels = None):
     n_rows = int(np.ceil(N / n_cols))
 
     for i in range(len(images)):
-        cv2.imwrite(str(i).zfill(2)+'.jpg',images[i])
+        cv2.imwrite(str(i).zfill(2)+'.jpg',np.array(images[i]))
 save_images(images, seeds[:len(images)])
