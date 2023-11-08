@@ -4,7 +4,7 @@ from diffusers import DiffusionPipeline, StableDiffusionPipeline
 
 
 #pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
-pipe = StableDiffusionPipeline.from_ckpt('./ckpts/senhentai_v12.safetensors',local_files_only=True, torch_dtype=torch.float16,safety_checker=None,requires_safety_checker=False)
+pipe = StableDiffusionPipeline.from_ckpt('senhentai_v12.safetensors',local_files_only=True, torch_dtype=torch.float16,safety_checker=None,requires_safety_checker=False)
 
 # "deliberate.safetensors",local_files_only=True, torch_dtype=torch.float16,safety_checker=None,requires_safety_checker=False
 
