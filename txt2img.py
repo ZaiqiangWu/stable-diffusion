@@ -1,7 +1,7 @@
 from diffusers import DiffusionPipeline
 import torch
 
-model_id = "./"
+model_id = "./ckpts"
 pipe = DiffusionPipeline.from_pretrained(model_id, use_safetensors=True)
 pipe = pipe.to("cuda")
 
