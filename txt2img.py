@@ -1,10 +1,10 @@
 import torch
 
-from diffusers import DiffusionPipeline
+from diffusers import DiffusionPipeline, StableDiffusionPipeline
 
 
 #pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
-pipe = DiffusionPipeline.from_pretrained("./ckpts/senhentai_v12.safetensors",use_safetensors=True)
+pipe = StableDiffusionPipeline.from_single_file("./ckpts/senhentai_v12.safetensors")
 
 
 def null_safety(images, **kwargs):
