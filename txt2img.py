@@ -198,4 +198,5 @@ def save_images(images, labels = None):
 
     for i in range(len(images)):
         cv2.imwrite(str(i).zfill(2)+'.png',np.array(images[i])[:,:,[2,1,0]])
+        break
 save_images(images, seeds[:len(images)])
