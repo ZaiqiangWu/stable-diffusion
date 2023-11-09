@@ -46,7 +46,7 @@ model_path = "Hentai"
 
 if clip_skip > 1:
     # TODO clean this up with the condition below.
-    pipe = diffusers.StableDiffusionInpaintPipeline(
+    pipe = diffusers.StableDiffusionInpaintPipeline.from_pretrained(
     #pipe = diffusers.DiffusionPipeline.from_pretrained(
         model_path,
         torch_dtype = torch_dtype,
@@ -54,7 +54,7 @@ if clip_skip > 1:
         text_encoder = text_encoder,
     )
 else:
-    pipe = diffusers.StableDiffusionInpaintPipeline(
+    pipe = diffusers.StableDiffusionInpaintPipeline.from_pretrained(
     #pipe = diffusers.DiffusionPipeline.from_pretrained(
         model_path,
         torch_dtype = torch_dtype,
