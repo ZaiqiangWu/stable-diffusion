@@ -210,7 +210,7 @@ for count, seed in enumerate(seeds):
             generator = torch.manual_seed(seed),
         ).images
 
-    images.append(new_img)
+    images+=new_img
 
 os.system("rm *.jpg")
 os.system("rm *.png")
