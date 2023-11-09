@@ -46,14 +46,16 @@ model_path = "Hentai"
 
 if clip_skip > 1:
     # TODO clean this up with the condition below.
-    pipe = diffusers.DiffusionPipeline.from_pretrained(
+    pipe = diffusers.StableDiffusionInpaintPipeline(
+    #pipe = diffusers.DiffusionPipeline.from_pretrained(
         model_path,
         torch_dtype = torch_dtype,
         safety_checker = None,
         text_encoder = text_encoder,
     )
 else:
-    pipe = diffusers.DiffusionPipeline.from_pretrained(
+    pipe = diffusers.StableDiffusionInpaintPipeline(
+    #pipe = diffusers.DiffusionPipeline.from_pretrained(
         model_path,
         torch_dtype = torch_dtype,
         safety_checker = None
@@ -125,7 +127,7 @@ def get_prompt_embeddings(
     return torch.cat(concat_embeds, dim = 1), torch.cat(neg_embeds, dim = 1)
 
 
-prompt = """girl"""
+prompt = """girl， black hair"""
 
 
 negative_prompt = """worst quality"""
@@ -160,12 +162,32 @@ height = 512
 
 images = []
 
+
+import PIL
+import requests
+import torch
+from io import BytesIO
+
+def download_image(url):
+    response = requests.get(url)
+    return PIL.Image.open(BytesIO(response.content)).convert("RGB")
+
+
+img_url = "https://raw.githubusercontent.com/CompVis/latent-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo.png"
+mask_url = "https://raw.githubusercontent.com/CompVis/latent-diffusion/main/data/inpainting_examples/overture-creations-5sI6fQgYIuo_mask.png"
+
+init_image = download_image(img_url).resize((512, 512))
+mask_image = download_image(mask_url).resize((512, 512))
+
+
 for count, seed in enumerate(seeds):
     start_time = time.time()
 
     if use_prompt_embeddings is False:
         new_img = pipe(
             prompt = prompt,
+            image=init_image,
+            mask_image=mask_image,
             negative_prompt = negative_prompt,
             width = width,
             height = height,
@@ -177,6 +199,8 @@ for count, seed in enumerate(seeds):
     else:
         new_img = pipe(
             prompt_embeds = prompt_embeds,
+            image=init_image,
+            mask_image=mask_image,
             negative_prompt_embeds = negative_prompt_embeds,
             width = width,
             height = height,
@@ -186,8 +210,7 @@ for count, seed in enumerate(seeds):
             generator = torch.manual_seed(seed),
         ).images
 
-
-    images = images + new_img
+    images.append(new_img)
 
 os.system("rm *.jpg")
 os.system("rm *.png")
