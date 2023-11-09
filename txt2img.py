@@ -125,7 +125,7 @@ def get_prompt_embeddings(
     return torch.cat(concat_embeds, dim = 1), torch.cat(neg_embeds, dim = 1)
 
 
-prompt = """topless girl, white lace panties bra"""
+prompt = """girl, white lace panties and bra"""
 
 
 negative_prompt = """worst quality"""
