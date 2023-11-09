@@ -145,7 +145,7 @@ use_prompt_embeddings = True
 
 # Seed and batch size.
 start_idx = 0
-batch_size = 4
+batch_size = 1
 seeds = [i for i in range(start_idx , start_idx + batch_size, 1)]
 
 # Number of inference steps.
@@ -198,5 +198,5 @@ def save_images(images, labels = None):
 
     for i in range(len(images)):
         cv2.imwrite(str(i).zfill(2)+'.png',np.array(images[i])[:,:,[2,1,0]])
-        break
+
 save_images(images, seeds[:len(images)])
