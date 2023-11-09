@@ -189,6 +189,7 @@ for count, seed in enumerate(seeds):
 
     images = images + new_img
 
+os.system("rm *.jpg")
 # Plot pipeline outputs.
 def save_images(images, labels = None):
     N = len(images)
