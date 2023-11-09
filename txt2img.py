@@ -155,7 +155,7 @@ num_inference_steps = 20
 guidance_scale = 7
 
 # Image dimensions - limited to GPU memory.
-width  = 768
+width  = 512
 height = 512
 
 images = []
