@@ -193,9 +193,8 @@ os.system("rm *.jpg")
 # Plot pipeline outputs.
 def save_images(images, labels = None):
     N = len(images)
-    n_cols = 5
-    n_rows = int(np.ceil(N / n_cols))
+
 
     for i in range(len(images)):
-        cv2.imwrite(str(i).zfill(2)+'.jpg',np.array(images[i])[:,:,[2,1,0]])
+        cv2.imwrite(str(i).zfill(2)+'.png',np.array(images[i])[:,:,[2,1,0]])
 save_images(images, seeds[:len(images)])
