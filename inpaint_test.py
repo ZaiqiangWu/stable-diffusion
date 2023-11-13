@@ -2,6 +2,8 @@ import PIL
 import requests
 import torch
 from io import BytesIO
+import cv2
+import numpy as np
 
 from diffusers import StableDiffusionInpaintPipeline
 
@@ -24,3 +26,4 @@ pipe = pipe.to("cuda")
 
 prompt = "Face of a yellow cat, high resolution, sitting on a park bench"
 image = pipe(prompt=prompt, image=init_image, mask_image=mask_image).images[0]
+cv2.imwrite('test_inpaint.png',np.array(image)[:,:,[2,1,0]])
