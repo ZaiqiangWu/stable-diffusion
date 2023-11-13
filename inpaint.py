@@ -217,8 +217,6 @@ os.system("rm *.png")
 # Plot pipeline outputs.
 def save_images(images, labels = None):
     N = len(images)
-
-
     for i in range(len(images)):
         cv2.imwrite(str(i).zfill(2)+'.png',np.array(images[i])[:,:,[2,1,0]])
 
